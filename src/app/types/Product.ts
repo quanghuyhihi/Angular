@@ -14,6 +14,6 @@ export type Product = {
 };
 
 export type ProductAdmin = Omit<Product, 'id' | 'category'> & {
-  _id: string;
+  id: string;
   category: Category;
 };

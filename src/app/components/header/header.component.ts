@@ -27,5 +27,9 @@ export class HeaderComponent {
       label: 'Contact',
       link: '/',
     },
+    {
+      label: 'Admin',
+      link: '/admin',
+    }
   ]; // NgFor
 }

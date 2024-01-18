@@ -21,9 +21,16 @@ export class ProductsComponent {
       .subscribe((products) => (this.productList = products)); // callApi.then(cb fuc)
   }
   handleDeleteProduct(id: string) {
-    console.log(id);
-    // alert(id)
-    // goi service deleteProduct
+    if(window.confirm('Do you really want remove this product?')){
+      this.productService
+      .deleteProductAdmin(id)
+      .subscribe(
+        ()=>
+        (this.productList = this.productList.filter(
+          (product) =>product.id !==id
+        ))
+      )
+    }
   }
   // deleteProduct(id) : productService.deleteProductById(id)
 }

@@ -8,19 +8,19 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
   // call api
-  apiUrl = 'https://fakestoreapi.com/products';
-  apiAdminUrl = 'https://hoadv-nodejs.vercel.app/api/products'; // khai bao apiUrl
+  apiAdminUrl = 'https://65a66fdb74cf4207b4f005e4.mockapi.io/products'; // khai bao apiUrl
 
   http = inject(HttpClient); // inject bien http
   constructor() {}
 
   getProductList(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl); //axios.get(apiUrl)
+    return this.http.get<Product[]>(this.apiAdminUrl); //axios.get(apiUrl)
   }
 
   getProductListAdmin(): Observable<ProductAdmin[]> {
     return this.http.get<ProductAdmin[]>(this.apiAdminUrl); //axios.get(apiUrl)
   }
-
-  // delete ProductById(id): this.http.delete(apiAdminUrl + id)
+  deleteProductAdmin(id:string):Observable<Product>{
+    return this.http.delete<Product>(`${this.apiAdminUrl}/${id}`)
+  }
 }

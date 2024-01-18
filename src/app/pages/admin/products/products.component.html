@@ -5,10 +5,9 @@
     <thead
       class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
     >
-      <tr>
+      <tr class="bg-orange-400 text-white">
         <th scope="col" class="px-6 py-3">Product name</th>
         <th scope="col" class="px-6 py-3">Description</th>
-        <th scope="col" class="px-6 py-3">Category</th>
         <th scope="col" class="px-6 py-3">Price</th>
         <th scope="col" class="px-6 py-3">Action</th>
       </tr>
@@ -22,22 +21,21 @@
           scope="row"
           class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
         >
-          {{ product.title }}
+          {{ product.title   }}
         </th>
         <!-- truncateDescription(120) -->
         <td class="px-6 py-4">{{ product.description | description : 120 }}</td>
-        <td class="px-6 py-4">{{ product.category.title }}</td>
         <td class="px-6 py-4">${{ product.price }}</td>
         <td class="px-6 py-4">
           <a
             href="#"
-            class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+            class="font-medium text-blue-600 dark:text-blue-500 hover:underline p-3"
             >Edit</a
           >
           <!--Envent (target)="statement" (click)="deleteProduct(product.id)" -->
           <button
-            (click)="handleDeleteProduct(product._id)"
-            class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+            (click)="handleDeleteProduct(product.id)"
+            class="font-medium text-blue-600 dark:text-blue-500 hover:underline hover:text-red-600"
           >
             Remove
           </button>
