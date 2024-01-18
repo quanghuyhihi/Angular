@@ -1,12 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { NgFor } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { FormBuilder,FormGroup,FormsModule,ReactiveFormsModule,Validators,FormControl } from '@angular/forms';
 import { ProductAdmin } from '../../../types/Product';
 import { ProductService } from '../../../services/product.service'; // import services
 import { DescriptionPipe } from '../../../pipes/description.pipe';
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [NgFor, DescriptionPipe],
+  imports: [NgFor, DescriptionPipe, RouterLink],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
@@ -21,20 +23,15 @@ export class ProductsComponent {
       .subscribe((products) => (this.productList = products)); // callApi.then(cb fuc)
   }
   handleDeleteProduct(id: string) {
-    if(window.confirm('Do you really want remove this product?')){
+    if (window.confirm('Do you really remove product?')) {
       this.productService
-      .deleteProductAdmin(id)
-      .subscribe(
-        ()=>
-        (this.productList = this.productList.filter(
-          (product) =>product.id !==id
-        ))
-      )
+        .deleteProductById(id)
+        .subscribe(
+          () =>
+            (this.productList = this.productList.filter(
+              (product) => product._id !== id
+            ))
+        );
     }
   }
-  // deleteProduct(id) : productService.deleteProductById(id)
 }
-
-// 1. Viet service
-// 2. Update UI
-// 3. Handle trong component
