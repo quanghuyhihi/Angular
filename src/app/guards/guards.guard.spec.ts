@@ -1,17 +1,26 @@
-import { TestBed } from '@angular/core/testing';
-import { CanActivateFn } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
-import { guardsGuard } from './guards.guard';
+@Injectable({
+  providedIn: 'root',
+})
+export class adminGuard implements CanActivate {
 
-describe('guardsGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => guardsGuard(...guardParameters));
+  constructor(private userService: UserService, private router: Router) {}
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-  });
-
-  it('should be created', () => {
-    expect(executeGuard).toBeTruthy();
-  });
-});
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    if (this.userService.isLoggedIn()) {
+      const userRole = this.userService.getRole();
+      if (userRole === 'admin') {
+        return true;
+      } else {
+        this.router.navigate(['']);
+        return false;
+      }
+    } else {
+      this.router.navigate(['login']);
+      return false;
+    }
+  }
+}
