@@ -8,14 +8,14 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
   // call api
-  apiUrl = 'https://fakestoreapi.com/products';
-  apiAdminUrl = 'https://hoadv-nodejs.vercel.app/api/products'; // khai bao apiUrl
+ 
+  apiAdminUrl = 'https://database-r1g7.onrender.com/products'; // khai bao apiUrl
 
   http = inject(HttpClient); // inject bien http
   constructor() {}
 
   getProductList(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl); //axios.get(apiUrl)
+    return this.http.get<Product[]>(this.apiAdminUrl); //axios.get(apiUrl)
   }
 
   getProductListAdmin(): Observable<ProductAdmin[]> {
