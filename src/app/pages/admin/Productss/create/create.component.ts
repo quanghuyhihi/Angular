@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Category } from '../../../types/Category';
-import { CategoryService } from '../../../services/category.service';
+import { Category } from '../../../../types/Category';
+import { CateService } from '../../../../services/category.service';
 import { NgFor } from '@angular/common';
-import { ProductService } from '../../../services/product.service';
+import { ProductService } from '../../../../services/product.service';
 
 @Component({
   selector: 'app-create',
@@ -14,7 +14,7 @@ import { ProductService } from '../../../services/product.service';
   styleUrl: './create.component.css',
 })
 export class CreateComponent {
-  categoryService = inject(CategoryService); // inject vao bien
+  categoryService = inject(CateService); // inject vao bien
   productService = inject(ProductService); // inject vao bien
   router = inject(Router);
 
@@ -30,7 +30,7 @@ export class CreateComponent {
  
   ngOnInit(): void {
     this.categoryService
-      .getCategoryListAdmin()
+      .getCateList()
       .subscribe((categories) => (this.categoryList = categories)); // callApi.then(cb fuc)
   }
   handleSubmit() {

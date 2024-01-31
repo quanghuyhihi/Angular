@@ -2,9 +2,9 @@ import { Component, inject } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormBuilder,FormGroup,FormsModule,ReactiveFormsModule,Validators,FormControl } from '@angular/forms';
-import { ProductAdmin } from '../../../types/Product';
-import { ProductService } from '../../../services/product.service'; // import services
-import { DescriptionPipe } from '../../../pipes/description.pipe';
+import { ProductAdmin } from '../../../../types/Product';
+import { ProductService } from '../../../../services/product.service'; // import services
+import { DescriptionPipe } from '../../../../pipes/description.pipe';
 @Component({
   selector: 'app-products',
   standalone: true,
@@ -29,7 +29,7 @@ export class ProductsComponent {
         .subscribe(
           () =>
             (this.productList = this.productList.filter(
-              (product) => product._id !== id
+              (product) => product.id !== id
             ))
         );
     }

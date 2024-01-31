@@ -2,10 +2,10 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ProductService } from '../../../services/product.service'; // import services
-import { ProductAdd } from '../../../types/Product';
-import { CategoryService } from '../../../services/category.service';
-import { Category } from '../../../types/Category';
+import { ProductService } from '../../../../services/product.service'; // import services
+import { ProductAdd } from '../../../../types/Product';
+import { CateService } from '../../../../services/category.service';
+import { Category } from '../../../../types/Category';
 import { NgFor } from '@angular/common';
 
 @Component({
@@ -27,7 +27,7 @@ export class EditComponent {
     rate: 0,
   };
 
-  categoryService = inject(CategoryService); // inject vao bien
+  categoryService = inject(CateService); // inject vao bien
   productService = inject(ProductService); // inject vao bien
   router = inject(Router);
 
@@ -36,7 +36,7 @@ export class EditComponent {
 
   ngOnInit(): void {
     this.categoryService
-      .getCategoryListAdmin()
+      .getCateList()
       .subscribe((categories) => (this.categoryList = categories));
     // Lay ProductId From Url
     this.route.params.subscribe((param) => {
@@ -51,7 +51,7 @@ export class EditComponent {
       .getDetailProductById(this.productId)
       .subscribe(
         (product) =>
-          (this.productEdit = { ...product, category: product.category._id })
+          (this.productEdit = { ...product, category: product.category.id })
       );
   }
 
