@@ -1,0 +1,52 @@
+<h1 class="text-center uppercase font-bold text-3xl mb-4">Users List</h1>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <table
+    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 "
+  >
+    <thead
+      class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+    >
+      <tr class="bg-orange-400 text-white">
+        <th scope="col" class="px-6 py-3 border border-black rounded">Email</th>
+        <th scope="col" class="px-6 py-3 border border-black rounded">Username</th>
+        <th scope="col" class="px-6 py-3 border border-black rounded">Password</th>
+        <th scope="col" class="px-6 py-3 border border-black rounded">Role</th>
+        <th scope="col" class="px-6 py-3 border border-black rounded">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let users of userList"
+        class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+      >
+        <th
+          scope="row"
+          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border border-black"
+        >
+          {{ users.email   }}
+        </th>
+        <!-- truncateDescription(120) -->
+        <td class="px-6 py-4 border border-black">{{ users.username }}</td>
+        <td class="px-6 py-4 border border-black">{{ users.password }}</td>
+        <td class="px-6 py-4 border border-black">{{ users.role }}</td>
+        <td class="px-6 py-4 border border-black">
+          <button class="bg-green-500 rounded-md p-1 mr-2"><a
+            [routerLink]="['/admin/users/edit', users.id]"
+            class="m-2 font-medium text-white dark:text-blue-500 hover:underline hover:text-red-600 "
+
+            >Edit
+          </a></button>
+
+          <button
+            (click)="handleDeleteUser(users.id)"
+            class=" bg-green-500 rounded-md p-1 mr-2 font-medium  text-white dark:text-blue-500 hover:underline hover:text-red-600"
+          >
+            Remove
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+

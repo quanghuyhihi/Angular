@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-
 import { ProductService } from '../../../../services/product.service'; // import services
 import { ProductAdd } from '../../../../types/Product';
 import { CateService } from '../../../../services/category.service';

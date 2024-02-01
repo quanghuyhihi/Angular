@@ -23,13 +23,14 @@ export class LoginComponent {
     private userService: UserService,
     private router: Router,
     private toastrService: ToastrService
+    
   ) {}
 
   loginUser() {
     const { email, password } = this.loginform.value;
     this.userService.getUserByEmail(email as string).subscribe({
       next: (response) => {
-        const user = response[0]; // TÀI KHOẢN ADMIN => EMAIL: quangha280503@gmail.com ; PASSWORD: 280503
+        const user = response[0]; 
         if (user && user.password === password) {
           sessionStorage.setItem('email', email as string);
           sessionStorage.setItem('role', user.role);
@@ -43,5 +44,7 @@ export class LoginComponent {
         this.toastrService.error('An error occurred. Please try again later.', 'Error');
       },
     });
+    
   }
+  
 }

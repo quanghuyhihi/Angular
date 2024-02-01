@@ -10,6 +10,8 @@ import { AdminGuard } from './guards/admin.guard';
 import { CategoryComponent } from './pages/admin/Category/catelist/catelist.component';
 import { CreateCateComponent } from './pages/admin/Category/createcate/createcate.component';
 import { EditcateComponent } from '../app/pages/admin/Category/editcate/editcate.component';
+import { UserlistComponent } from './pages/admin/Userss/userlist/userlist.component';
+import { UsereditComponent } from './pages/admin/Userss/useredit/useredit.component';
 
 
 export const routes: Routes = [
@@ -30,6 +32,8 @@ export const routes: Routes = [
       { path: 'category', component: CategoryComponent },
       { path: 'category/create', component: CreateCateComponent },
       { path: 'category/edit/:id', component: EditcateComponent },
+      { path: 'users', component: UserlistComponent },
+      { path: 'users/edit/:id', component: UsereditComponent },
     ],
   },
 ];
