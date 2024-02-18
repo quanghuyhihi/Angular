@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './register.component.html',
 })
 export class RegisterComponent implements OnInit {
+  showPassword: boolean = false;
   registerform!: FormGroup;
   userList: any[] = [];
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private toast:ToastrService) {

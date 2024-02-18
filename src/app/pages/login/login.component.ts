@@ -13,10 +13,13 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  showPassword: boolean = false;
+
   loginform = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
   });
+
 
   constructor(
     private fb: FormBuilder,

@@ -13,7 +13,6 @@ import { EditcateComponent } from '../app/pages/admin/Category/editcate/editcate
 import { UserlistComponent } from './pages/admin/Userss/userlist/userlist.component';
 import { UsereditComponent } from './pages/admin/Userss/useredit/useredit.component';
 
-
 export const routes: Routes = [
   // route '/' = page Home
   // path, component

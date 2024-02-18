@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { UserService } from './services/user.service';
+
+import { NgxPaginationModule } from 'ngx-pagination';
+
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
+  imports: [RouterOutlet,NgxPaginationModule],
+
+templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  
 }
