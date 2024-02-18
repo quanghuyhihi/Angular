@@ -25,6 +25,7 @@ export class ProductsComponent implements OnInit  {
   filteredProductList: ProductAdmin[] = [];
   searchText: string = '';
   p: number = 1;
+  selectedCategory: string = '';
   
   constructor() {
   }
@@ -59,5 +60,9 @@ export class ProductsComponent implements OnInit  {
     this.p=1;
   }
   onPageChange(event: number) {
-    this.p = event;}
+    this.p = event;
+  }
+
+  
+  
 }
