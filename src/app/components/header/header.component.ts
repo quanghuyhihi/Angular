@@ -2,6 +2,8 @@ import { Component,OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
+import { UserService } from '../../services/user.service';
+
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -10,7 +12,7 @@ import { NgIf } from '@angular/common';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent  {
-
+  isLoggedIn: boolean = false;
   title = 'Homeppage';
   menuList = [
     {
@@ -34,5 +36,15 @@ export class HeaderComponent  {
       link: '/admin/products',
     }
   ]; // NgFor
+  constructor(private userService: UserService) { }
+  ngOnInit(): void {
+    // Kiểm tra trạng thái đăng nhập khi component được khởi tạo
+    this.isLoggedIn = this.userService.isLoggedIn();
+  }
 
+  // Phương thức logout
+  logout(): void {
+    this.userService.logout(); // Thực hiện phương thức logout từ service
+    this.isLoggedIn = false; // Cập nhật biến trạng thái đăng nhập
+  }
 }

@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core'; // inject
+import { Injectable } from '@angular/core'; // inject
 import { HttpClient } from '@angular/common/http'; // HttpClient
 import { Observable } from 'rxjs';
 import { Category } from '../types/Category';
@@ -8,10 +8,10 @@ import { Category } from '../types/Category';
 export class CateService {
   // call api
  
-  apiAdminUrl = 'https://database-r1g7.onrender.com/categories'; // khai bao apiUrl
+  apiAdminUrl = 'http://localhost:3000/categories'; // khai bao apiUrl
 
-  http = inject(HttpClient); // inject bien http
-  constructor() {}
+ // inject bien http
+  constructor(private http: HttpClient) {}
 
   getCateList(): Observable<Category[]> {
     return this.http.get<Category[]>(this.apiAdminUrl); //axios.get(apiUrl)
@@ -30,7 +30,7 @@ export class CateService {
     return this.http.get<Category>(`${this.apiAdminUrl}/${id}`);
   }
 
-  updateCategoryById(product: Category, id: string) {
-    return this.http.put<Category>(`${this.apiAdminUrl}/${id}`, product);
+  updateCategoryById(category: Category, id: string) {
+    return this.http.put<Category>(`${this.apiAdminUrl}/${id}`, category);
   }
 }

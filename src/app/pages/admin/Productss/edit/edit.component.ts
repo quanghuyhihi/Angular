@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject,OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../../../services/product.service'; // import services
@@ -14,7 +14,7 @@ import { NgFor } from '@angular/common';
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.css',
 })
-export class EditComponent {
+export class EditComponent implements OnInit {
   productId: string | undefined;
 
   productEdit: ProductAdd = {
@@ -23,7 +23,7 @@ export class EditComponent {
     description: '',
     category: '',
     image: '',
-    rate: 0,
+ 
   };
 
   categoryService = inject(CateService); // inject vao bien
@@ -31,7 +31,7 @@ export class EditComponent {
   router = inject(Router);
 
   route = inject(ActivatedRoute);
-  categoryList: Category[] = [];
+  categoryList: Category[] =[];
 
   ngOnInit(): void {
     this.categoryService
@@ -61,5 +61,6 @@ export class EditComponent {
       .subscribe(() => this.router.navigate(['/admin/products']));
     // call service api POST products
   }
+  
 }
 

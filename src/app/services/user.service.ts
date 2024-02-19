@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
 import { User } from '../types/User';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable,BehaviorSubject } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = "https://database-r1g7.onrender.com/users";
+  private apiUrl = "http://localhost:3000/users";
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private toastr: ToastrService) { 
+    this.isLoggedInSubject.next(this.isLoggedIn());
+  }
   private currentUserKey = 'currentUser';
+  private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   setCurrentUser(user: User): void {
     localStorage.setItem(this.currentUserKey, JSON.stringify(user));
+    this.isLoggedInSubject.next(true);
   }
   getCurrentUser(): User | null {
     const userString = localStorage.getItem(this.currentUserKey);
@@ -19,6 +25,8 @@ export class UserService {
   }
   clearCurrentUser(): void {
     localStorage.removeItem(this.currentUserKey);
+    sessionStorage.removeItem('email'); // Xóa dữ liệu trong sessionStorage
+    this.isLoggedInSubject.next(false);
   }
   getUserByCode(id: any): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/${id}`);
@@ -28,7 +36,7 @@ export class UserService {
     return this.http.post<User>(this.apiUrl, data);
   }
   isLoggedIn(): boolean {
-    return sessionStorage.getItem('email') !== null;
+    return sessionStorage.getItem('email') !== null || localStorage.getItem(this.currentUserKey) !== null;
   }
   getUserByEmail(email: string): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiUrl}?email=${email}`);
@@ -53,5 +61,13 @@ export class UserService {
   updateUserById(userId: string, updatedUser: User): Observable<User> {
     const url = `${this.apiUrl}/${userId}`;
     return this.http.put<User>(url, updatedUser);
+  }
+  getIsLoggedIn(): Observable<boolean> {
+    return this.isLoggedInSubject.asObservable();
+  }
+  logout(): void {
+    // Xóa thông tin người dùng hiện tại và cập nhật trạng thái đăng nhập
+    this.clearCurrentUser();
+    this.toastr.success('Logged out successfully!');
   }
 }

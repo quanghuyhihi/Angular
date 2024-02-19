@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class ProductService {
   // call api
  
-  apiAdminUrl = 'https://database-r1g7.onrender.com/products'; // khai bao apiUrl
+  apiAdminUrl = 'http://localhost:3000/products'; // khai bao apiUrl
 
   http = inject(HttpClient); // inject bien http
   constructor() {}
@@ -30,7 +30,7 @@ export class ProductService {
     return this.http.post<Product>(this.apiAdminUrl, product);
   }
 
-  getDetailProductById(id: string) {
+  getDetailProductById(id: string):Observable<ProductAdmin> {
     return this.http.get<ProductAdmin>(`${this.apiAdminUrl}/${id}`);
   }
 

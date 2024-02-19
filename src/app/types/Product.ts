@@ -7,18 +7,16 @@ export type Product = {
   image: string;
   description: string;
   category: string; // Omit loai bo
-  rating: {
-    rate: number;
-    count: number;
-  };
+
 };
 
-export type ProductAdmin = Omit<Product, 'id' | 'category' | 'rate'> & {
+export type ProductAdmin = Omit<Product, 'id' | 'category' > & {
   id: string;
   category: Category;
-  rate: number
+
+  
 };
 
-export type ProductAdd = Omit<Product, 'id' | 'rating'> & {
-  rate: number;
+export type ProductAdd = Omit<Product, 'id' > & {
+  
 };

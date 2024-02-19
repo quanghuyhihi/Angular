@@ -23,7 +23,6 @@ export class CreateComponent {
     price: 0,
     description: '',
     image: '',
-    rate: 0,
     category: '',
   };
   categoryList: Category[] = [];
