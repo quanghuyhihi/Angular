@@ -1,7 +1,7 @@
 import { Category } from './Category';
 
 export type Product = {
-  id: number; // Omit loai bo
+  id: string; // Omit loai bo
   title: string;
   price: number;
   image: string;
@@ -10,7 +10,7 @@ export type Product = {
 
 };
 
-export type ProductAdmin = Omit<Product, 'id' | 'category' > & {
+export type ProductAdmin = Omit<Product, 'id'  > & {
   id: string;
   category: Category;
 
@@ -18,5 +18,4 @@ export type ProductAdmin = Omit<Product, 'id' | 'category' > & {
 };
 
 export type ProductAdd = Omit<Product, 'id' > & {
-  
 };

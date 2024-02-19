@@ -43,11 +43,14 @@ export class ProductsComponent implements OnInit {
   p: number = 1;
   selectedCategory: string = '';
   noProductsFound: boolean = false;
+
   constructor() {}
+
   ngOnInit(): void {
     this.loadProducts();
     this.loadCategories();
   }
+
   loadProducts() {
     this.productService.getProductListAdmin().subscribe((products) => {
       this.productList = products;
@@ -60,6 +63,7 @@ export class ProductsComponent implements OnInit {
       .getCateList()
       .subscribe((categories) => (this.categoryList = categories));
   }
+
   handleDeleteProduct(id: string) {
     if (window.confirm('Do you really want to remove the product?')) {
       this.productService.deleteProductById(id).subscribe(() => {
@@ -80,11 +84,20 @@ export class ProductsComponent implements OnInit {
     this.p = 1;
     this.noProductsFound = this.filteredProductList.length === 0;
   }
+
   onPageChange(event: number) {
     this.p = event;
   }
 
- 
-
-
+  filterProductsByCategory() {
+    if (this.selectedCategory) {
+      this.filteredProductList = this.productList.filter((product) =>
+        product.category.toLowerCase().includes(this.selectedCategory.toLowerCase())
+      );
+    } else {
+      this.filteredProductList = [...this.productList];
+    }
+    this.p = 1;
+    this.noProductsFound = this.filteredProductList.length === 0;
+  }
 }

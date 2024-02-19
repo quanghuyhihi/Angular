@@ -1,43 +1,39 @@
-import { Component, inject,OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ProductService } from '../../../../services/product.service'; // import services
+import { ProductService } from '../../../../services/product.service';
 import { ProductAdd } from '../../../../types/Product';
 import { CateService } from '../../../../services/category.service';
 import { Category } from '../../../../types/Category';
+import { FormsModule } from '@angular/forms';
 import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-edit',
-  standalone: true,
-  imports: [FormsModule, NgFor],
   templateUrl: './edit.component.html',
-  styleUrl: './edit.component.css',
+  styleUrls: ['./edit.component.css'],
+  standalone: true,
+  imports:[FormsModule,NgFor]
 })
-export class EditComponent implements OnInit {
+export class EditComponent  {
   productId: string | undefined;
-
   productEdit: ProductAdd = {
     title: '',
     price: 0,
     description: '',
     category: '',
     image: '',
- 
   };
+  categoryList: Category[] = [];
 
-  categoryService = inject(CateService); // inject vao bien
-  productService = inject(ProductService); // inject vao bien
-  router = inject(Router);
-
-  route = inject(ActivatedRoute);
-  categoryList: Category[] =[];
+  constructor(
+    private categoryService: CateService,
+    private productService: ProductService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.categoryService
-      .getCateList()
-      .subscribe((categories) => (this.categoryList = categories));
-    // Lay ProductId From Url
+    this.categoryService.getCateList().subscribe((categories) => (this.categoryList = categories));
     this.route.params.subscribe((param) => {
       this.productId = param['id'];
       return this.getProductDetail();
@@ -46,12 +42,10 @@ export class EditComponent implements OnInit {
 
   getProductDetail() {
     if (!this.productId) return;
-    this.productService
-      .getDetailProductById(this.productId)
-      .subscribe(
-        (product) =>
-          (this.productEdit = { ...product, category: product.category.id })
-      );
+    this.productService.getDetailProductById(this.productId).subscribe(
+      (product) =>
+        (this.productEdit = { ...product, category: product.category.id })
+    );
   }
 
   handleSubmit() {
@@ -59,8 +53,5 @@ export class EditComponent implements OnInit {
     this.productService
       .updateProductById(this.productEdit, this.productId)
       .subscribe(() => this.router.navigate(['/admin/products']));
-    // call service api POST products
   }
-  
 }
-

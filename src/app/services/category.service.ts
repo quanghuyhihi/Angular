@@ -1,22 +1,19 @@
-import { Injectable } from '@angular/core'; // inject
-import { HttpClient } from '@angular/common/http'; // HttpClient
+import { Injectable } from '@angular/core'; 
+import { HttpClient } from '@angular/common/http'; 
 import { Observable } from 'rxjs';
 import { Category } from '../types/Category';
+
 @Injectable({
   providedIn: 'root',
 })
 export class CateService {
-  // call api
- 
-  apiAdminUrl = 'http://localhost:3000/categories'; // khai bao apiUrl
+  private apiAdminUrl = 'http://localhost:3000/categories';
 
- // inject bien http
   constructor(private http: HttpClient) {}
 
   getCateList(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.apiAdminUrl); //axios.get(apiUrl)
+    return this.http.get<Category[]>(this.apiAdminUrl);
   }
-
 
   deleteCategoryById(id: string) {
     return this.http.delete(`${this.apiAdminUrl}/${id}`);
@@ -26,7 +23,7 @@ export class CateService {
     return this.http.post<Category>(this.apiAdminUrl, category);
   }
 
-  getDetailCategoryById(id: string) {
+  getDetailCategoryById(id: string): Observable<Category> {
     return this.http.get<Category>(`${this.apiAdminUrl}/${id}`);
   }
 

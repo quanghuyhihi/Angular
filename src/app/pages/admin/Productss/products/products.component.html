@@ -1,13 +1,25 @@
-
-<div>
-  <p class="font-bold mb-2 text">Find supplements you want in here</p>
-  <img class="w-9 ml-20" src="../../../../../assets/down-arrow-4.svg" alt="">
-  <input class="border border-black rounded-md p-1 text-center" type="text" placeholder="Search products" [(ngModel)]="searchText" (input)="searchProducts()" />
-  <!-- <button class="bg-gradient-to-r from-blue-300 to-yellow-500 ml-1 p-1 rounded-md border hover:bg-gray-500 text-white" (click)="searchProducts()">Search</button> -->
-</div>
-<div 
-*ngIf="noProductsFound" class="no-results font-bold p-3 text-red-500 ">
- Products not found!
+<div class="mx-auto flex justify-between">
+  <div>
+    <label for="category" class="font-bold text block mb-2 ">Filter by category</label>
+    <img class="w-9 ml-10" src="../../../../../assets/down-arrow-4.svg" alt="">
+    <select [(ngModel)]="selectedCategory" (change)="filterProductsByCategory()" name="category" id="category" class="border border-black rounded-md p-1">
+      
+      <option value="" selected>All categories</option>
+      <option *ngFor="let category of categoryList" [value]="category.name">{{ category.name }}</option>
+    </select>
+  </div>
+  
+  
+  <div>
+    <p class="font-bold mb-2">Find supplements you want in here</p>
+    <img class="w-9 ml-28" src="../../../../../assets/down-arrow-4.svg" alt="">
+    <input class="border border-black rounded-md p-1 ml-10 text-center" type="text" placeholder="Search products" [(ngModel)]="searchText" (input)="searchProducts()" />
+    <!-- <button class="bg-gradient-to-r from-blue-300 to-yellow-500 ml-1 p-1 rounded-md border hover:bg-gray-500 text-white" (click)="searchProducts()">Search</button> -->
+  </div>
+  <div 
+  *ngIf="noProductsFound" class="no-results font-bold p-3 text-red-500 ">
+   Products not found!
+  </div>
 </div>
 
 

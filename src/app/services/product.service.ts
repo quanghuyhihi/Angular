@@ -1,25 +1,22 @@
-import { Injectable, inject } from '@angular/core'; // inject
-import { HttpClient } from '@angular/common/http'; // HttpClient
-import { Product, ProductAdmin, ProductAdd } from '../types/Product';
+import { Injectable } from '@angular/core'; 
+import { HttpClient } from '@angular/common/http'; 
 import { Observable } from 'rxjs';
+import { Product, ProductAdmin, ProductAdd } from '../types/Product';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  // call api
- 
-  apiAdminUrl = 'http://localhost:3000/products'; // khai bao apiUrl
+  private apiAdminUrl = 'http://localhost:3000/products'; 
 
-  http = inject(HttpClient); // inject bien http
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getProductList(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiAdminUrl); //axios.get(apiUrl)
+    return this.http.get<Product[]>(this.apiAdminUrl);
   }
 
   getProductListAdmin(): Observable<ProductAdmin[]> {
-    return this.http.get<ProductAdmin[]>(this.apiAdminUrl); //axios.get(apiUrl)
+    return this.http.get<ProductAdmin[]>(this.apiAdminUrl);
   }
 
   deleteProductById(id: string) {
@@ -30,7 +27,7 @@ export class ProductService {
     return this.http.post<Product>(this.apiAdminUrl, product);
   }
 
-  getDetailProductById(id: string):Observable<ProductAdmin> {
+  getDetailProductById(id: string): Observable<ProductAdmin> {
     return this.http.get<ProductAdmin>(`${this.apiAdminUrl}/${id}`);
   }
 
